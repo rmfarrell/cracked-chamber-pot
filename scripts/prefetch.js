@@ -7,7 +7,7 @@ const contentful = require('contentful'),
   mkdirpAsync = promisify(mkdirp),
   space = process.env.CONTENTFUL_SPACE_ID,
   accessToken = process.env.CONTENTFUL_ACCESS_TOKEN,
-  { dataDir } = require('./shared'),
+  dataDir = path.join(__dirname, '../', 'public', 'data'),
   client = contentful.createClient({
     space,
     accessToken

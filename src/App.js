@@ -1,9 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import fetch from 'isomorphic-fetch'
 
 // https://dbgnfp6gtb006.cloudfront.net/fit-in/300x400/filters:fill(00ff00):rotate(90)/pressages.jpg
 class App extends Component {
+
+  componentDidMount() {
+    fetch('./data/page-0.json')
+      .then((res) => res.json())
+      .then(console.log)
+      .catch(console.error)
+  }
+
   render() {
     return (
       <div className="App">
