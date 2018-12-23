@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import './styles/vars.css'
 import './styles/global.css'
 import styles from './styles/App.module.css'
+import Gallery from './Gallery'
+import Header from './Header'
 import fetch from 'isomorphic-fetch'
 import { client, printMapper, fetchPrints } from './contentful'
 
 const ACCESS_TOKEN = 'fb7b553b6f6e423674b0f9e323bc5d561148245d2727840b8732c66f7172ae53',
   SPACE_ID = 'bmgi0b085usv',
-  contentful = client(SPACE_ID, ACCESS_TOKEN)
+  contentful = client(SPACE_ID, ACCESS_TOKEN);
 
 // https://dbgnfp6gtb006.cloudfront.net/fit-in/300x400/filters:fill(00ff00):rotate(90)/pressages.jpg
 class App extends Component {
@@ -51,6 +53,8 @@ class App extends Component {
   render() {
     return (
       <div className={styles.root}>
+        <Header />
+        <Gallery />
       </div>
     );
   }

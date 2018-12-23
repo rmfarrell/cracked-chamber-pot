@@ -1,0 +1,70 @@
+.root {
+  z-index: 10;
+  position: relative;
+  position: fixed;
+  width: 100%;
+  transform: translateY(-22em);
+  transition: transform 0.3s cubic-bezier(.66,.18,.75,1.53);
+}
+
+.root.open {
+  transform: translateY(-4em);
+}
+
+h1 {
+  text-align: center;
+}
+
+.settings_container {
+  height: 22em;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid var(--black);
+  background: var(--brown) var(--hatch-desc) repeat;
+  padding: 0 0.5em 0.75em 0.5em;
+  box-shadow: 0 0 5em rgba(0,0,0,0.75);
+}
+
+.settings_container:before {
+  content: "";
+  display: block;
+  height: 3.5em;
+  width: 7em;
+  position: absolute;
+  border-top-left-radius: 7em;
+  border-top-right-radius: 7em;
+  bottom: 0;
+  right: 2em;
+  background: var(--brown) var(--hatch-desc) repeat;
+}
+
+.settings {
+  background-color: var(--white);
+  height: 100%;
+  width: 100%;
+}
+
+.toggle {
+  position: absolute;
+  bottom: -4em;
+  right: 2em;
+  height: 6em;
+  width: 6em;
+  background-color: red;
+  z-index: 1;
+  border-radius: 50%;
+  border: 1px solid var(--black);
+  padding: 0.2em;
+  transition: all 0.5s cubic-bezier(.66,.18,.75,1.53);
+  background-color: var(--white);
+  transform: translateY(1em) scale(1.2);
+}
+
+.toggle:focus {
+  outline: none;
+}
+
+.open .toggle {
+  background: var(--black);
+  transform: translateY(0) scale(1);
+}

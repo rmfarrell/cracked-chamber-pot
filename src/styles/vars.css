@@ -6,9 +6,10 @@
   --palegreen: rgba(197, 218, 193, 1);
   --graygreen: rgba(188, 208, 199, 1);
   --lightbrown: rgba(169, 178, 172, 1);
-  --brown: rgba(137, 137, 128, 1);
+  --brown: #E3DCD5;
   --darkbrown: rgba(107, 107, 98, 1);
   --black: rgb(35, 35, 46);
+  --white: #FAF5F0;
   
   /* textures */
   --hatch-desc: repeating-linear-gradient(
