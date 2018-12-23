@@ -11,7 +11,7 @@ const { promisify } = require('util'),
   { fetchPrints, printMapper, client } = require('../src/contentful'),
   contentful = client(space, accessToken)
 
-writeData(3, 5)
+writeData(3, 16)
 
 function writeData(pages = 0, itemsPerPage = 0) {
 
