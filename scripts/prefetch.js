@@ -1,6 +1,6 @@
 require('dotenv').config()
-const contentful = require('contentful'),
-  { promisify } = require('util'),
+
+const { promisify } = require('util'),
   path = require('path'),
   { writeJson, mkdirp } = require('fs-extra'),
   writeJsonAsync = promisify(writeJson),
@@ -8,10 +8,8 @@ const contentful = require('contentful'),
   space = process.env.CONTENTFUL_SPACE_ID,
   accessToken = process.env.CONTENTFUL_ACCESS_TOKEN,
   dataDir = path.join(__dirname, '../', 'public', 'data'),
-  client = contentful.createClient({
-    space,
-    accessToken
-  })
+  { fetchPrints, printMapper, client } = require('../src/contentful'),
+  contentful = client(space, accessToken)
 
 writeData(3, 5)
 
@@ -22,7 +20,7 @@ function writeData(pages = 0, itemsPerPage = 0) {
   function writePage(page) {
 
     mkdirpAsync(dataDir)
-      .then(() => fetchPrints(page * itemsPerPage, itemsPerPage))
+      .then(() => fetchPrints(contentful, page * itemsPerPage, itemsPerPage))
       .then(({ total = 0, items = [] }) => {
         return total ? items.map(printMapper) : null
       })
@@ -39,17 +37,4 @@ function writeData(pages = 0, itemsPerPage = 0) {
       })
       .catch(console.error)
   }
-}
-
-function fetchPrints(skip = 0, limit = 12) {
-  return client
-    .getEntries({
-      skip,
-      limit,
-      order: '-sys.createdAt'
-    })
-}
-
-function printMapper({ fields = {} }) {
-  return fields
 }
