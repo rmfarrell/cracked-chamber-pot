@@ -3,15 +3,7 @@ import PropTypes from 'prop-types'
 import './styles/vars.css'
 import './styles/global.css'
 import styles from './styles/Gallery.module.css'
-import Masonry from 'react-masonry-component'
 import Print from './Print'
-import Card from './Card'
-
-
-const masonryOptions = {
-  transitionDuration: 0,
-  percentPosition: true
-};
 
 class Gallery extends Component {
   constructor(props) {
@@ -27,25 +19,15 @@ class Gallery extends Component {
 
   render() {
     return (
-      <Masonry
-        className={styles.root} // default ''
-        elementType={'div'} // default 'div'
-        options={masonryOptions} // default {}
-        disableImagesLoaded={false} // default false
-        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-      // imagesLoadedOptions={{}} // default {}
-      >
-        {this.props.items.map((item, idx) => {
-          if (idx % 2 == 0) return (
-            <Print key={item.title} {...item} />
-          )
-          return (
-
-            <Card key={item.title} {...item} />
-          )
-        })
+      <div className={styles.root}>
+        {
+          this.props.items.map((item, idx) => {
+            return (
+              <Print key={item.title} {...item} />
+            )
+          })
         }
-      </Masonry>
+      </div>
     );
   }
 }

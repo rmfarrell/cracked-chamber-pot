@@ -10,6 +10,7 @@
   --darkbrown: rgba(107, 107, 98, 1);
   --black: rgb(35, 35, 46);
   --white: #FAF5F0;
+  --frameborder: #F7ECE1;
   
   /* textures */
   --hatch-desc: repeating-linear-gradient(
