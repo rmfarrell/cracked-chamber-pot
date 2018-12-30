@@ -39,10 +39,6 @@ class App extends Component {
       .catch(console.error)
   }
 
-  componentDidUpdate() {
-    console.log(this.state.items)
-  }
-
   resfreshPage = () => {
     this.setState({
       page: ++this.page
@@ -54,7 +50,7 @@ class App extends Component {
     return (
       <div className={styles.root}>
         <Header />
-        <Gallery />
+        <Gallery items={this.state.items} />
       </div>
     );
   }
