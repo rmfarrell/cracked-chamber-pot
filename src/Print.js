@@ -12,7 +12,8 @@ class Print extends Component {
     this.image = React.createRef();
     this.state = {
       vertical: null,
-      imgLoaded: false
+      imgLoaded: false,
+      size: 0
     }
   }
 
@@ -27,22 +28,24 @@ class Print extends Component {
       this.setState({ imgLoaded: true })
       img.onload = null;
     }
+    this.setState({
+      size: randomizeSize()
+    })
   }
 
   render() {
-    const size = randomizeSize()
-
     return (
       <article className={[
         styles.root,
         this.state.imgLoaded ? styles.loaded : '',
         this.state.vertical ? styles.vertical : styles.horizontal
-      ].join(' ')}>
+      ].join(' ')}
+        onClick={this.props.open}>
         <figure className={styles.frame}>
           <img
             ref={this.image}
             alt={this.props.title}
-            src={`${urlBase}/fit-in/${size}x${size}/${this.props.image}.jpg`} />
+            src={`${urlBase}/fit-in/${this.state.size}x${this.state.size}/${this.props.image}.jpg`} />
         </figure>
         <figcaption>
           <div>

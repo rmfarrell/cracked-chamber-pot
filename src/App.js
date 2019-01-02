@@ -19,7 +19,8 @@ class App extends Component {
       items: [],
       page: 0,
       isFiltered: false,
-      showFilters: false
+      showFilters: false,
+      openIndex: null
     }
   }
 
@@ -39,6 +40,22 @@ class App extends Component {
       .catch(console.error)
   }
 
+  openItem = (idx) => {
+    this.closeItems()
+    const items = this.state.items.slice(0)
+    items[idx].active = true;
+    this.setState({ items })
+  }
+
+  closeItems = () => {
+    this.setState({
+      items: this.state.items.map(item => {
+        item.active = false
+        return item
+      })
+    })
+  }
+
   resfreshPage = () => {
     this.setState({
       page: ++this.page
@@ -50,7 +67,11 @@ class App extends Component {
     return (
       <div className={styles.root}>
         <Header />
-        <Gallery items={this.state.items} />
+        <Gallery
+          items={this.state.items}
+          closeItems={this.closeItems}
+          openItem={this.openItem}
+        />
       </div>
     );
   }
