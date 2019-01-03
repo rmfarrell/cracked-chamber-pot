@@ -14,7 +14,7 @@ class Gallery extends Component {
   componentDidMount() { }
 
   componentDidUpdate() {
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   render() {
@@ -26,7 +26,7 @@ class Gallery extends Component {
               <Print
                 key={item.title}
                 close={this.props.closeItems}
-                open={this.props.openItem.bind(this, idx)}
+                open={this.props.open.bind(this, item.slug)}
                 {...item}
               />
             )

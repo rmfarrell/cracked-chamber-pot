@@ -1,4 +1,5 @@
-const contentful = require('contentful');
+const contentful = require('contentful'),
+  slugify = require('slugify')
 
 function fetchPrints(client, skip = 0, limit = 12) {
   if (!client) {
@@ -13,6 +14,7 @@ function fetchPrints(client, skip = 0, limit = 12) {
 }
 
 function printMapper({ fields = {} }) {
+  fields.slug = slugify(fields.title)
   return fields
 }
 

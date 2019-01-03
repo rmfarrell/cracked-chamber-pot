@@ -5,6 +5,7 @@ import styles from './styles/App.module.css'
 import Navigo from 'navigo'
 import Gallery from './Gallery'
 import Header from './Header'
+import Detail from './Detail'
 import fetch from 'isomorphic-fetch'
 import { client, printMapper, fetchPrints } from './contentful'
 
@@ -23,6 +24,7 @@ class App extends Component {
       isFiltered: false,
       showFilters: false,
       openIndex: null,
+      active: '',
       filters: {
 
       }
@@ -45,14 +47,15 @@ class App extends Component {
       .catch(console.error)
 
     router.on({
-      '/detail/:id': ({ id }) => {
-        this.setState({ view: 'detail' })
+      '/detail/:slug': ({ slug = '' }) => {
+        this.setState({ active: slug })
       },
       '/filters': () => {
-        this.setState({ view: 'filters' })
+        this.setState({ showFilters: true })
       },
       '*': () => {
         this.setState({ view: '' })
+        this.setState({ showFilters: false })
       }
     })
       .resolve();
@@ -60,7 +63,6 @@ class App extends Component {
 
   toggleFilters = () => {
     const showFilters = !this.state.showFilters
-    this.setState({ showFilters })
     showFilters ? router.navigate('/filters') : router.navigate('/')
   }
 
@@ -68,20 +70,11 @@ class App extends Component {
     this.setState({ filters })
   }
 
-  openItem = (idx) => {
-    this.closeItems()
-    const items = this.state.items.slice(0)
-    items[idx].active = true;
-    this.setState({ items })
-  }
-
-  closeItems = () => {
-    this.setState({
-      items: this.state.items.map(item => {
-        item.active = false
-        return item
-      })
-    })
+  setActive = (slug = '') => {
+    if (!slug) {
+      return;
+    }
+    router.navigate(`/detail/${slug}`)
   }
 
   resfreshPage = () => {
@@ -92,10 +85,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className={[
-        styles.root,
-        styles[this.state.view]
-      ].join(' ')}>
+      <div className={styles.root}>
         <Header
           toggleFilters={this.toggleFilters}
           filters={this.state.filters}
@@ -105,7 +95,12 @@ class App extends Component {
         <Gallery
           items={this.state.items}
           closeItems={this.closeItems}
-          openItem={this.openItem}
+          open={this.setActive}
+        />
+        <Detail
+          {...this.state.items
+            .find(({ slug = '' }) => slug === this.state.active)}
+          show={!!this.state.active}
         />
       </div>
     );
