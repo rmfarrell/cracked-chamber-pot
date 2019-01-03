@@ -3,7 +3,7 @@
   position: relative;
   position: fixed;
   width: 100%;
-  transform: translateY(-22em);
+  transform: translateY(-21.25em);
   transition: transform 0.3s cubic-bezier(.66,.18,.75,1.53);
 }
 
@@ -28,13 +28,13 @@ h1 {
 .settings_container:before {
   content: "";
   display: block;
-  height: 3.5em;
-  width: 7em;
+  height: 3em;
+  width: 6em;
   position: absolute;
-  border-top-left-radius: 7em;
-  border-top-right-radius: 7em;
-  bottom: 0;
-  right: 2em;
+  border-top-left-radius: 6em;
+  border-top-right-radius: 6em;
+  bottom: 0em;
+  right: 3em;
   background: var(--brown) var(--hatch-desc) repeat;
 }
 

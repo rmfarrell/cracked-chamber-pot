@@ -1,5 +1,5 @@
 .root {
-  margin: 12em 5% 0;
+  padding: 1em 5% 0;
   z-index: 10;
   display: flex;
   flex-wrap: wrap;

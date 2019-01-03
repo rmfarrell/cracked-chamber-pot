@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './styles/vars.css'
 import './styles/global.css'
 import styles from './styles/App.module.css'
+import Navigo from 'navigo'
 import Gallery from './Gallery'
 import Header from './Header'
 import fetch from 'isomorphic-fetch'
@@ -9,7 +10,8 @@ import { client, printMapper, fetchPrints } from './contentful'
 
 const ACCESS_TOKEN = 'fb7b553b6f6e423674b0f9e323bc5d561148245d2727840b8732c66f7172ae53',
   SPACE_ID = 'bmgi0b085usv',
-  contentful = client(SPACE_ID, ACCESS_TOKEN);
+  contentful = client(SPACE_ID, ACCESS_TOKEN),
+  router = new Navigo(null, true);
 
 // https://dbgnfp6gtb006.cloudfront.net/fit-in/300x400/filters:fill(00ff00):rotate(90)/pressages.jpg
 class App extends Component {
@@ -20,7 +22,10 @@ class App extends Component {
       page: 0,
       isFiltered: false,
       showFilters: false,
-      openIndex: null
+      openIndex: null,
+      filters: {
+
+      }
     }
   }
 
@@ -38,6 +43,29 @@ class App extends Component {
     getUnfilteredData()
       .then((items) => this.setState({ items }))
       .catch(console.error)
+
+    router.on({
+      '/detail/:id': ({ id }) => {
+        this.setState({ view: 'detail' })
+      },
+      '/filters': () => {
+        this.setState({ view: 'filters' })
+      },
+      '*': () => {
+        this.setState({ view: '' })
+      }
+    })
+      .resolve();
+  }
+
+  toggleFilters = () => {
+    const showFilters = !this.state.showFilters
+    this.setState({ showFilters })
+    showFilters ? router.navigate('/filters') : router.navigate('/')
+  }
+
+  updateFilters = (filters) => {
+    this.setState({ filters })
   }
 
   openItem = (idx) => {
@@ -60,13 +88,20 @@ class App extends Component {
     this.setState({
       page: ++this.page
     }, (err) => getUnfilteredData(this.page))
-
   }
 
   render() {
     return (
-      <div className={styles.root}>
-        <Header />
+      <div className={[
+        styles.root,
+        styles[this.state.view]
+      ].join(' ')}>
+        <Header
+          toggleFilters={this.toggleFilters}
+          filters={this.state.filters}
+          updateFilters={this.state.updateFilters}
+          open={this.state.showFilters}
+        />
         <Gallery
           items={this.state.items}
           closeItems={this.closeItems}
