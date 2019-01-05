@@ -4,7 +4,7 @@
   bottom: 0;
   width: 100%;
   background-color: var(--frameborder);
-  overflow-y: visible;
+  overflow-y: auto;
   transition: transform 0.5s var(--ease);
   height: 100vh;
   transform: translateY(calc(100vh - 0.75em));
@@ -52,3 +52,14 @@
   color: white;
 }
 
+.imageContainer {
+  width: 95%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.imageContainer img {
+  margin: 3em auto;
+  mix-blend-mode: darken;
+  width: 100%;
+}

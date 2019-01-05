@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import './styles/vars.css'
 import './styles/global.css'
 import styles from './styles/Print.module.css'
-
-const urlBase = 'https://dbgnfp6gtb006.cloudfront.net';
+import { urlBase } from './shared'
 
 class Print extends Component {
   constructor(props) {
