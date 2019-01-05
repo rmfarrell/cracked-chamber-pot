@@ -7,13 +7,6 @@
   justify-content: center;
 }
 
-.root.loaded.horizontal {
-}
-
-.root.loaded.vertical {
-}
-
-
 .frame {
   background-color: var(--frameborder);
   padding: 10%;

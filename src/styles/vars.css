@@ -27,4 +27,8 @@
     transparent 1px, 
     transparent 4px
   );
+  
+  /* animations */
+   --fun-bounce: cubic-bezier(.66,.18,.75,1.53);
+   --ease: cubic-bezier(.49,.2,.48,.99);
 }

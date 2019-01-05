@@ -25,9 +25,7 @@ class App extends Component {
       showFilters: false,
       openIndex: null,
       active: '',
-      filters: {
-
-      }
+      filters: {}
     }
   }
 
@@ -56,6 +54,7 @@ class App extends Component {
       '*': () => {
         this.setState({ view: '' })
         this.setState({ showFilters: false })
+        this.setState({ active: '' })
       }
     })
       .resolve();
@@ -83,6 +82,10 @@ class App extends Component {
     }, (err) => getUnfilteredData(this.page))
   }
 
+  closeDetail = () => {
+    router.navigate('/');
+  }
+
   render() {
     return (
       <div className={styles.root}>
@@ -101,6 +104,7 @@ class App extends Component {
           {...this.state.items
             .find(({ slug = '' }) => slug === this.state.active)}
           show={!!this.state.active}
+          close={this.closeDetail}
         />
       </div>
     );

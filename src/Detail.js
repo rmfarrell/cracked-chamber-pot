@@ -16,8 +16,18 @@ class Detail extends Component {
 
 
   render() {
+    const {
+      root = '',
+      show = '',
+      closeContainer = ''
+    } = styles
     return (
-      <article className={[this.root, this.props.show ? 'show' : ''].join(' ')}>
+      <article className={[root, this.props.show ? show : ''].join(' ')}>
+        <div className={closeContainer}>
+          <span />
+          <button onClick={this.props.close}>Close</button>
+          <span />
+        </div>
         <h1>{this.props.title}</h1>
       </article>
     );

@@ -13,3 +13,7 @@ h1, h2, h3 {
 * {
   box-sizing: border-box;
 }
+
+button:focus {
+  outline: none;
+}

@@ -55,13 +55,9 @@ h1 {
   border-radius: 50%;
   border: 1px solid var(--black);
   padding: 0.2em;
-  transition: all 0.5s cubic-bezier(.66,.18,.75,1.53);
+  transition: all 0.5s var(--fun-bounce);
   background-color: var(--white);
   transform: translateY(1em) scale(1.2);
-}
-
-.toggle:focus {
-  outline: none;
 }
 
 .open .toggle {
